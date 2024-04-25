@@ -1,48 +1,48 @@
-#Librerias
+# Libraries
 import os
 import tkinter as tk
 from tkinter import messagebox
 
-#Función 
-def buscar_termino():
-    termino = entrada.get()
-    resultados = []
-    carpeta = "./libros"
+# Function
+def search_term():
+    term = entry.get()
+    results = []
+    folder = "./libros"
 
-    # Iterar a través de cada documento
-    for archivo in os.listdir(carpeta):
-        if archivo.endswith(".txt"):  # Solo procesa archivos de texto
-            ruta_documento = os.path.join(carpeta, archivo)
+    # Iterate through each document
+    for file in os.listdir(folder):
+        if file.endswith(".txt"):  # Only process text files
+            document_path = os.path.join(folder, file)
         
-            # Verificar si el término de consulta aparece en el documento
-            with open(ruta_documento, 'r', encoding='utf-8') as f:
-                contenido = f.read().lower()
-                if termino.lower() in contenido:
-                    resultados.append(archivo)
+            # Check if the search term appears in the document
+            with open(document_path, 'r', encoding='utf-8') as f:
+                content = f.read().lower()
+                if term.lower() in content:
+                    results.append(file)
     
-    # Mostrar los resultados en una ventana emergente
-    if resultados:
-        mensaje = f"El término '{termino}' fue encontrado en los siguientes documentos:\n\n"
-        for documento in resultados:
-            mensaje += f"- {documento}\n"
-        messagebox.showinfo("Resultados", mensaje)
+    # Show the results in a popup window
+    if results:
+        message = f"The term '{term}' was found in the following documents:\n\n"
+        for doc in results:
+            message += f"- {doc}\n"
+        messagebox.showinfo("Results", message)
     else:
-        messagebox.showinfo("Resultados", f"El término '{termino}' no aparece en ningún documento.")
+        messagebox.showinfo("Results", f"The term '{term}' does not appear in any document.")
 
-# Crear la ventana principal
-ventana = tk.Tk()
-ventana.title("TAREA BÚSQUEDA")
-ventana.geometry("400x250")
+# Create the main window
+window = tk.Tk()
+window.title("SEARCH TASK")
+window.geometry("400x250")
 
-# Crear un campo de entrada
-etiqueta = tk.Label(ventana, text="Ingrese el término que desea buscar:")
-etiqueta.pack(pady=5)
-entrada = tk.Entry(ventana, width=40)
-entrada.pack(pady=5)
+# Create an input field
+label = tk.Label(window, text="Enter the term you want to search:")
+label.pack(pady=5)
+entry = tk.Entry(window, width=40)
+entry.pack(pady=5)
 
-# Crear un botón para iniciar la búsqueda
-boton_buscar = tk.Button(ventana, text="Buscar", command=buscar_termino)
-boton_buscar.pack(pady=5)
+# Create a button to start the search
+search_button = tk.Button(window, text="Search", command=search_term)
+search_button.pack(pady=5)
 
-# Ejecutar la aplicación
-ventana.mainloop()
+# Run the application
+window.mainloop()
